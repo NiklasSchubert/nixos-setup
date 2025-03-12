@@ -3,12 +3,12 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/vdb";
+        device = "/dev/vda";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
-              size = "512M";
+              size = "256M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -56,7 +56,7 @@
                     };
                     "/swap" = {
                       mountpoint = "/.swapvol";
-                      swap.swapfile.size = "20M";
+                      swap.swapfile.size = "8G";
                     };
                   };
                 };
