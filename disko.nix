@@ -1,9 +1,10 @@
+disko.nixosModules.disko
 {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/vda";
+        device = "/dev/disk/by-diskseq/1";
         content = {
           type = "gpt";
           partitions = {
