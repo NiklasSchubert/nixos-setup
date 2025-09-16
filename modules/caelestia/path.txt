@@ -1,0 +1,3 @@
+/home/{user}/.dotfiles/modules/caelestia/background.jpg
+#path.txt will be the path to your desired background.
+#Make it an impure path!!! The try hards can cry about it :D

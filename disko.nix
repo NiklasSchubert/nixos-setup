@@ -1,15 +1,14 @@
-disko.nixosModules.disko
 {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/disk/by-diskseq/1";
+        device = "/dev/vda";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
-              size = "256M";
+              size = "512M";
               type = "EF00";
               content = {
                 type = "filesystem";
