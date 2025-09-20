@@ -6,73 +6,27 @@
 
   programs.dots-hyprland = {
     enable = true;
-    source = ./configs;
-    packageSet = "essential";
-    mode = "declarative";
+    style = "illogical-impulse";
     
-    quickshell = {
-      appearance = {
-        transparency = true;
-        fakeScreenRounding = 1;
-      };
-      
-      bar = {
-        bottom = true;  # Move bar to bottom
-        topLeftIcon = "distro";
-        cornerStyle = 1;  # Float style
-        
-        utilButtons = {
-          showColorPicker = true;
-          showScreenSnip = true;
-          showMicToggle = true;
-          showDarkModeToggle = true;
-        };
-        
-        workspaces = {
-          shown = 5;  # Only show 5 workspaces
-          monochromeIcons = false;
-          alwaysShowNumbers = true;
-        };
-      };
-      
-      battery = {
-        low = 25;
-        critical = 10;
-        automaticSuspend = false;
-      };
-      
-      apps = {
-        terminal = "foot";
-        taskManager = "htop";
-      };
-      
-      time = {
-        format = "HH:mm:ss";  # 24-hour with seconds
-        dateFormat = "dddd, MMMM dd, yyyy";
-      };
+    components = {
+      hyprland = true;
+      quickshell = true;
+      theming = false;  # Phase 4
+      ai = false;       # Phase 4
+      audio = true;
     };
     
-    hyprland = {
-      general = {
-        gapsIn = 6;
-        gapsOut = 10;
-        borderSize = 3;
-        allowTearing = true;  # For gaming
-      };
-      
-      decoration = {
-        rounding = 12;
-        blurEnabled = false;  # Disable for performance
-      };
-      
-      gestures = {
-        workspaceSwipe = true;
-      };
-      
-      monitors = [
-        "eDP-1,1920x1080@60,0x0,1"
-        "HDMI-A-1,1920x1080@60,1920x0,1"
-      ];
+    features = {
+      overview = true;
+      sidebar = false;  # Phase 4
+      notifications = true;
+      mediaControls = true;
+    };
+    
+    keybinds = {
+      modifier = "SUPER";
+      terminal = "foot";
     };
   };
+
 }
