@@ -7,43 +7,37 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+    dots-hyprland = {
+      url = "github:celesrenata/end-4-flakes";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, caelestia-shell, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, dots-hyprland, ... }@inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
     in {
-      nixosConfigurations.nixos = lib.nixosSystem {
-        specialArgs = { inherit inputs system; };
-        modules = [
-          inputs.home-manager.nixosModules.default
-          ./configuration.nix
-          {
-            nixpkgs.overlays = [
-              (final: prev: {
-                caelestia-shell = caelestia-shell.packages.${system}.caelestia-shell;
-                caelestia-cli   = caelestia-shell.inputs.caelestia-cli.packages.${system}.caelestia-cli;
-              })
-            ];
-          }
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.users.niklas = {
-              imports = [
-                #./modules/hm #CHANGE ME FOR UR SETUP
-                #./modules/hyprland #CHANGE ME FOR UR SETUP
-                ./modules/caelestia #CHANGE ME FOR UR SETUP 
-              ];
-            };
-          }
-        ];
+      nixosConfigurations = {
+        tuxedo = let
+          username = "niklas";
+          specialArgs = {inherit username dots-hyprland;};
+        in lib.nixosSystem {
+          inherit specialArgs;
+          modules = [
+            home-manager.nixosModules.default  
+            
+            ./hosts/tuxedo/configuration.nix
+            ./users/${username}/nixos.nix
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              
+              home-manager.extraSpecialArgs = inputs // specialArgs;
+              home-manager.users.${username} = import ./users/${username}/home.nix  { inherit inputs; };
+            }
+          ];
+        };
       };
     };
 }
