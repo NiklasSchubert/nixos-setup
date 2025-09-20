@@ -6,63 +6,75 @@
 
   programs.dots-hyprland = {
     enable = true;
-    source = ./configs;
+    source = ./configs;  # Use local configs
     packageSet = "essential";
-    mode = "declarative";
+    mode = "hybrid";
     
+    # 🎨 Quickshell Configuration
     quickshell = {
       appearance = {
-        transparency = true;
-        fakeScreenRounding = 1;
+        extraBackgroundTint = true;
+        fakeScreenRounding = 2;  # When not fullscreen
+        transparency = false;
       };
       
       bar = {
-        bottom = true;  # Move bar to bottom
-        topLeftIcon = "distro";
-        cornerStyle = 1;  # Float style
+        bottom = false;  # Top bar
+        cornerStyle = 0;  # Hug style
+        topLeftIcon = "spark";
+        showBackground = true;
+        verbose = true;
         
         utilButtons = {
-          showColorPicker = true;
           showScreenSnip = true;
-          showMicToggle = true;
+          showColorPicker = true;   # 🎯 Enable color picker!
+          showMicToggle = false;
+          showKeyboardToggle = true;
           showDarkModeToggle = true;
+          showPerformanceProfileToggle = false;
         };
         
         workspaces = {
-          shown = 5;  # Only show 5 workspaces
-          monochromeIcons = false;
-          alwaysShowNumbers = true;
+          monochromeIcons = true;
+          shown = 10;
+          showAppIcons = true;
+          alwaysShowNumbers = false;
+          showNumberDelay = 300;
         };
       };
       
       battery = {
-        low = 25;
-        critical = 10;
-        automaticSuspend = false;
+        low = 20;
+        critical = 5;
+        automaticSuspend = true;
+        suspend = 3;
       };
       
       apps = {
         terminal = "foot";
-        taskManager = "htop";
+        bluetooth = "kcmshell6 kcm_bluetooth";
+        network = "plasmawindowed org.kde.plasma.networkmanagement";
+        taskManager = "plasma-systemmonitor --page-name Processes";
       };
       
       time = {
-        format = "HH:mm:ss";  # 24-hour with seconds
-        dateFormat = "dddd, MMMM dd, yyyy";
+        format = "hh:mm";
+        dateFormat = "ddd, dd/MM";
       };
     };
     
+    # 🖥️ Hyprland Configuration
     hyprland = {
       general = {
-        gapsIn = 6;
-        gapsOut = 10;
-        borderSize = 3;
-        allowTearing = true;  # For gaming
+        gapsIn = 4;
+        gapsOut = 7;
+        borderSize = 2;
+        allowTearing = false;
       };
       
       decoration = {
-        rounding = 12;
-        blurEnabled = false;  # Disable for performance
+        rounding = 16;
+        blurEnabled = true;
       };
       
       gestures = {
@@ -70,9 +82,34 @@
       };
       
       monitors = [
-        "eDP-1,1920x1080@60,0x0,1"
-        "HDMI-A-1,1920x1080@60,1920x0,1"
+        # Add your monitor config here, e.g.:
+        # "eDP-1,1920x1080@60,0x0,1"
       ];
     };
+    
+    # 🖥️ Terminal Configuration
+    terminal = {
+      scrollback = {
+        lines = 1000;
+        multiplier = 3.0;
+      };
+      
+      cursor = {
+        style = "beam";
+        blink = false;
+        beamThickness = 1.5;
+      };
+      
+      colors = {
+        alpha = 0.95;
+      };
+      
+      mouse = {
+        hideWhenTyping = false;
+        alternateScrollMode = true;
+      };
+    };
   };
+            
+
 }
