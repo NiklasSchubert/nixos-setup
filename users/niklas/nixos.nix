@@ -4,7 +4,7 @@
   users.users.niklas = {
     isNormalUser = true;
     description = "Niklas";
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "networkmanager" "scanner" "lp" "wheel" "input" "uinput" "render" "video" "audio" "docker" "libvirt" "kvm" "vboxusers" "adbusers" "gamemode" ];
     initialPassword = "changeme";
     packages = with pkgs; [
       tree

@@ -1,115 +1,97 @@
-{ inputs, ... }: {
+{ inputs, lib, pkgs, ... }:
+{
   imports = [
     ../../home/core.nix
-    inputs.dots-hyprland.homeManagerModules.default
+    ../../home/desktop/hyprland.nix          # Hyprland window manager and keybindings
+    ../../home/desktop/hypridle.nix          # Hypridle idle management and power saving
+    ../../home/desktop/quickshell.nix        # Quickshell desktop shell (placeholder)
+    ../../home/desktop/theming.nix           # Cursors, themes, and visual appearance
   ];
 
-  programs.dots-hyprland = {
-    enable = true;
-    source = ./configs;  # Use local configs
-    packageSet = "essential";
-    mode = "hybrid";
+    # Desktop environment and Wayland packages
+  home.packages = with pkgs; [
+    # Wayland and desktop environment
+    xdg-desktop-portal-hyprland
+    xwayland
+    brightnessctl
+    wlsunset
+    wayland-scanner
+    waypipe
+    xorg.xhost
+    wev
     
-    # 🎨 Quickshell Configuration
-    quickshell = {
-      appearance = {
-        extraBackgroundTint = true;
-        fakeScreenRounding = 2;  # When not fullscreen
-        transparency = false;
-      };
-      
-      bar = {
-        bottom = false;  # Top bar
-        cornerStyle = 0;  # Hug style
-        topLeftIcon = "spark";
-        showBackground = true;
-        verbose = true;
-        
-        utilButtons = {
-          showScreenSnip = true;
-          showColorPicker = true;   # 🎯 Enable color picker!
-          showMicToggle = false;
-          showKeyboardToggle = true;
-          showDarkModeToggle = true;
-          showPerformanceProfileToggle = false;
-        };
-        
-        workspaces = {
-          monochromeIcons = true;
-          shown = 10;
-          showAppIcons = true;
-          alwaysShowNumbers = false;
-          showNumberDelay = 300;
-        };
-      };
-      
-      battery = {
-        low = 20;
-        critical = 5;
-        automaticSuspend = true;
-        suspend = 3;
-      };
-      
-      apps = {
-        terminal = "foot";
-        bluetooth = "kcmshell6 kcm_bluetooth";
-        network = "plasmawindowed org.kde.plasma.networkmanagement";
-        taskManager = "plasma-systemmonitor --page-name Processes";
-      };
-      
-      time = {
-        format = "hh:mm";
-        dateFormat = "ddd, dd/MM";
-      };
-    };
+    # Desktop utilities
+    polkit
+    polkit_gnome
+    dconf
+    killall
+    gnome-keyring
+    wayvnc
+    evtest
+    zenity
+    linux-pam
+    cliphist
+    sudo
+    ssh-tools
     
-    # 🖥️ Hyprland Configuration
-    hyprland = {
-      general = {
-        gapsIn = 4;
-        gapsOut = 7;
-        borderSize = 2;
-        allowTearing = false;
-      };
-      
-      decoration = {
-        rounding = 16;
-        blurEnabled = true;
-      };
-      
-      gestures = {
-        workspaceSwipe = true;
-      };
-      
-      monitors = [
-        # Add your monitor config here, e.g.:
-        # "eDP-1,1920x1080@60,0x0,1"
-      ];
-    };
+    # GTK and GUI libraries
+    gtk3
+    gtk3.dev
+    libappindicator-gtk3.dev
+    libnotify.dev
+    gtk4
+    gtk4.dev
+    gjs
+    gjs.dev
+    gtksourceview
+    gtksourceview.dev
+    xdg-desktop-portal-gtk
     
-    # 🖥️ Terminal Configuration
-    terminal = {
-      scrollback = {
-        lines = 1000;
-        multiplier = 3.0;
-      };
-      
-      cursor = {
-        style = "beam";
-        blink = false;
-        beamThickness = 1.5;
-      };
-      
-      colors = {
-        alpha = 0.95;
-      };
-      
-      mouse = {
-        hideWhenTyping = false;
-        alternateScrollMode = true;
-      };
-    };
-  };
-            
-
+    # Non-GTK GUI libraries
+    tk
+    
+    # Desktop integration
+    libdbusmenu-gtk3
+    upower
+    yad
+    gobject-introspection
+    wrapGAppsHook
+    
+    # QT libraries
+    libsForQt5.qwt
+    
+    # GNOME components
+    gnome-keyring
+    gnome-control-center
+    gnome-bluetooth
+    gnome-shell
+    nautilus
+    blueberry
+    networkmanager
+    
+    # AGS and Hyprland dependencies
+    coreutils
+    cliphist
+    curl
+    ddcutil
+    fuzzel
+    # fuzzel-emoji
+    ripgrep
+    gojq
+    dart-sass
+    axel
+    wlogout
+    wl-clipboard
+    hyprpicker
+    gammastep
+    libnotify
+    bc
+    xdg-user-dirs
+    
+    # Text processing and OCR
+    tesseract
+    
+    # Node.js (required for various desktop components)
+    nodejs_20
+  ];
 }

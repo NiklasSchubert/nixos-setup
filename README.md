@@ -23,3 +23,5 @@ sudo nixos-rebuild switch --no-write-lock-file --impure --flake github:NiklasSch
 git clone https://github.com/NiklasSchubert/nixos-setup.git
 
 git fetch && git rebase
+
+git fetch && git reset --hard origin/main
