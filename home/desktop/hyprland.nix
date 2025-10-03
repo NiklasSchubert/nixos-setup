@@ -59,8 +59,8 @@
 
       # Input configuration
       input {
-          kb_layout = us
-          kb_variant =
+          kb_layout = de,us
+          kb_variant = ,altgr-intl
           kb_model =
           kb_options =
           kb_rules =
@@ -173,23 +173,16 @@
       # Music
       bind = $Primary$Secondary, M, exec, tidal-hifi
       bind = $Primary$Secondary$Tertiary, M, exec, env -u NIXOS_OZONE_WL cider --use-gl=desktop
-      bind = $Primary$Secondary$Alternate, M, exec, spotify
-      # Discord
-      bind = $Primary$Secondary, I, exec, discord 
       # Foot
-      bind = $Primary$Secondary, H, exec, foot
+      bind = $Primary, T, exec, foot
       bind = $Primary$Secondary$Tertiary, T, exec, foot sleep 0.01 && nmtui
       # Finders
       bind = $Primary$Secondary, J, exec, thunar
       bind = $Primary$Secondary$Tertiary, J, exec, nautilus
       # Browsers
-      bind = $Primary$Secondary, B, exec, firefox
-      bind = $Primary$Secondary$Tertiary, B, exec, chromium 
+      bind = $Primary, F, exec, firefox
       # Code editors
-      bind = $Primary$Secondary, U, exec, code
-      bind = $Primary$Secondary, X, exec, subl
-      bind = $Primary$Secondary, C, exec, code
-      bind = $Primary$Secondary$Tertiary, C, exec, jetbrains-toolbox
+      bind = $Primary, C, exec, code
       # Calculator
       bind = $Primary$Secondary, 3, exec, ~/.local/bin/wofi-calc
       bind = ,XF86Calculator, exec, ~/.local/bin/wofi-calc
@@ -202,7 +195,8 @@
       #+! Window Actions
       bind = $Primary$Secondary, Period, exec, pkill fuzzel || ~/.local/bin/fuzzel-emoji
       bind = $Alternate, F4, killactive,
-      bind = $Secondary$Alternate, Space, togglefloating, 
+      bind = $Primary, Q, killactive,
+      bind = $Primary, W, togglefloating, 
       bind = $Secondary$Alternate, Q, exec, hyprctl kill
 
       #+! Screenshot & Recording
@@ -285,17 +279,17 @@
       bind = $Secondary$Alternate, F, fullscreenstate, 0
 
       #+! Workspace Switching
-      bind = $Secondary, 1, workspace, 1
-      bind = $Secondary, 2, workspace, 2
-      bind = $Secondary, 3, workspace, 3
-      bind = $Secondary, 4, workspace, 4
-      bind = $Secondary, 5, workspace, 5
-      bind = $Secondary, 6, workspace, 6
-      bind = $Secondary, 7, workspace, 7
-      bind = $Secondary, 8, workspace, 8
-      bind = $Secondary, 9, workspace, 9
-      bind = $Secondary, 0, workspace, 10
-      bind = $Primary$Secondary, S, togglespecialworkspace,
+      bind = $Primary, 1, workspace, 1
+      bind = $Primary, 2, workspace, 2
+      bind = $Primary, 3, workspace, 3
+      bind = $Primary, 4, workspace, 4
+      bind = $Primary, 5, workspace, 5
+      bind = $Primary, 6, workspace, 6
+      bind = $Primary, 7, workspace, 7
+      bind = $Primary, 8, workspace, 8
+      bind = $Primary, 9, workspace, 9
+      bind = $Primary, 0, workspace, 10
+      bind = $Primary, S, togglespecialworkspace,
       bind = $Alternate, Tab, cyclenext
       bind = $Alternate, Tab, bringactivetotop,   # bring it to the top
 
