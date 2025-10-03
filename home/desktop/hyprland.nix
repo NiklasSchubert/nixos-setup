@@ -207,8 +207,7 @@
       bind = Super+Shift+Alt, mouse:273, exec, ~/.config/quickshell/ii/scripts/ai/primary-buffer-query.sh # AI summary for selected text
       bindl =,Print,exec,grim - | wl-copy
       bind = $Secondary$Alternate, C, exec, hyprpicker -a
-      bind = $Primary$Alternate, Space, exec, cliphist list | wofi -Iim --dmenu | cliphist decode | wl-copy && wtype -M ctrl v -M ctrl
-      bind = $Secondary$Alternate, V, exec, cliphist list | wofi -Iim --dmenu | cliphist decode | wl-copy && wtype -M ctrl v -M ctrl
+      bind = $Primary, V, exec, cliphist list | wofi -Iim --dmenu | cliphist decode | wl-copy && wtype -M ctrl v -M ctrl
 
       #+! Text Recognition (OCR)
       bind = $Primary$Secondary$Tertiary,S,exec,grim -g "$(slurp -d -c D1E5F4BB -b 1B232866 -s 00000000)" "tmp.png" && tesseract "tmp.png" - | wl-copy && rm "tmp.png"
@@ -233,8 +232,7 @@
       bindr = $Primary$Secondary, T, exec, ~/.config/quickshell/ii/scripts/colors/switchwall.sh
       
       # Desktop environment controls (converted from AGS to Quickshell)
-      bind = $Alternate, Tab, exec, hyprctl dispatch global quickshell:overviewToggle
-      bind = $Secondary, Space, exec, hyprctl dispatch global quickshell:overviewToggle
+      bind = $Primary, A, exec, hyprctl dispatch global quickshell:overviewToggle
       bind = $Secondary, B, exec, hyprctl dispatch global quickshell:sidebarLeftToggle
       bind = $Secondary, N, exec, hyprctl dispatch global quickshell:sidebarRightToggle
       bind = $Secondary, M, exec, hyprctl dispatch global quickshell:mediaControlsToggle
@@ -249,12 +247,20 @@
       bind = $Secondary$Tertiary, down, movewindow, d
       
       # Move focus
-      bind = $Secondary, left, movefocus, l
-      bind = $Secondary, right, movefocus, r
-      bind = $Alternate, up, movefocus, u
-      bind = $Alternate, down, movefocus, d
+      bind = $Primary, left, movefocus, l
+      bind = $Primary, right, movefocus, r
+      bind = $Primary, up, movefocus, u
+      bind = $Primary, down, movefocus, d
       bind = $Secondary, BracketLeft, movefocus, l
       bind = $Secondary, BracketRight, movefocus, r
+
+      # Move active window around current workspace with mainMod + SHIFT + CTRL [←→↑↓]
+      $moveactivewindow=grep -q "true" <<< $(hyprctl activewindow -j | jq -r .floating) && hyprctl dispatch moveactive
+      binded = $Primary $Tertiary$Secondary, left, Move activewindow left, exec, $moveactivewindow -30 0 || hyprctl dispatch movewindow l
+      binded = $Primary $Tertiary$Secondary, right, Move activewindow right, exec, $moveactivewindow 30 0 || hyprctl dispatch movewindow r
+      binded = $Primary $Tertiary$Secondary, up, Move activewindow up, exec, $moveactivewindow  0 -30 || hyprctl dispatch movewindow u
+      binded = $Primary $Tertiary$Secondary, down, Move activewindow down, exec, $moveactivewindow 0 30 || hyprctl dispatch movewindow d
+
 
       #+! Workspace Navigation
       bind = $Primary$Secondary, right, workspace, +1
@@ -294,17 +300,30 @@
       bind = $Alternate, Tab, bringactivetotop,   # bring it to the top
 
       #+! Move Windows to Workspace
-      bind = $Secondary$Alternate, 1, movetoworkspacesilent, 1
-      bind = $Secondary$Alternate, 2, movetoworkspacesilent, 2
-      bind = $Secondary$Alternate, 3, movetoworkspacesilent, 3
-      bind = $Secondary$Alternate, 4, movetoworkspacesilent, 4
-      bind = $Secondary$Alternate, 5, movetoworkspacesilent, 5
-      bind = $Secondary$Alternate, 6, movetoworkspacesilent, 6
-      bind = $Secondary$Alternate, 7, movetoworkspacesilent, 7
-      bind = $Secondary$Alternate, 8, movetoworkspacesilent, 8
-      bind = $Secondary$Alternate, 9, movetoworkspacesilent, 9
-      bind = $Secondary$Alternate, 0, movetoworkspacesilent, 10
-      bind = $Secondary$Alternate, S, movetoworkspacesilent, special
+      bind = $Primary$Tertiary, 1, movetoworkspace, 1
+      bind = $Primary$Tertiary, 2, movetoworkspace, 2
+      bind = $Primary$Tertiary, 3, movetoworkspace, 3
+      bind = $Primary$Tertiary, 4, movetoworkspace, 4
+      bind = $Primary$Tertiary, 5, movetoworkspace, 5
+      bind = $Primary$Tertiary, 6, movetoworkspace, 6
+      bind = $Primary$Tertiary, 7, movetoworkspace, 7
+      bind = $Primary$Tertiary, 8, movetoworkspace, 8
+      bind = $Primary$Tertiary, 9, movetoworkspace, 9
+      bind = $Primary$Tertiary, 0, movetoworkspace, 10
+      bind = $Primary$Tertiary, S, movetoworkspace, special
+
+      # Silent Move
+      bind = $Primary$Alternate, 1, movetoworkspacesilent, 1
+      bind = $Primary$Alternate, 2, movetoworkspacesilent, 2
+      bind = $Primary$Alternate, 3, movetoworkspacesilent, 3
+      bind = $Primary$Alternate, 4, movetoworkspacesilent, 4
+      bind = $Primary$Alternate, 5, movetoworkspacesilent, 5
+      bind = $Primary$Alternate, 6, movetoworkspacesilent, 6
+      bind = $Primary$Alternate, 7, movetoworkspacesilent, 7
+      bind = $Primary$Alternate, 8, movetoworkspacesilent, 8
+      bind = $Primary$Alternate, 9, movetoworkspacesilent, 9
+      bind = $Primary$Alternate, 0, movetoworkspacesilent, 10
+      bind = $Primary$Alternate, S, movetoworkspacesilent, special
 
       #+! Mouse Controls
       # Mouse workspace scrolling
@@ -314,11 +333,10 @@
       bind = $Primary$Secondary, mouse_down, workspace, -1
 
       # Mouse window controls
-      bindm = $Secondary, mouse:273, resizewindow
-      bindm = $Primary$Secondary, mouse:273, resizewindow
-      bindm = ,mouse:274, movewindow
-      bindm = $Primary$Secondary, Z, movewindow
-      bind = $Primary$Secondary, Backslash, resizeactive, exact 640 480
+      bindm = $Primary, mouse:272, movewindow
+      bindm = $Primary, mouse:273, resizewindow
+      bindm = $Primary, Z, movewindow
+      bindm = $Primary, X, resizewindow
 
       # Quickshell integration and desktop environment
       exec-once = quickshell -c ii
