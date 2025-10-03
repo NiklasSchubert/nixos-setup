@@ -2,10 +2,15 @@
 {
   imports = [
     ../../home/core.nix
+
+    # Desktop Environment Configuration
     ../../home/desktop/hyprland.nix          # Hyprland window manager and keybindings
     ../../home/desktop/hypridle.nix          # Hypridle idle management and power saving
     ../../home/desktop/quickshell.nix        # Quickshell desktop shell (placeholder)
     ../../home/desktop/theming.nix           # Cursors, themes, and visual appearance
+    
+    # Application and Program Configuration
+    ../../home/programs/media.nix           # Media applications (OBS, players, editors)
   ];
 
     # Desktop environment and Wayland packages
