@@ -5,6 +5,7 @@
       ./hardware-configuration.nix
       "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       ./disko.nix
+      ../../modules/boot.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -24,9 +25,6 @@
   time.timeZone = "Europe/Berlin";
 
   i18n.defaultLocale = "en_US.UTF-8";
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.networkmanager.enable = true;
   networking.hostName = "tuxedo";
