@@ -94,4 +94,6 @@
     # Node.js (required for various desktop components)
     nodejs_20
   ];
+
+  programs.vscode.enable = true;
 }
