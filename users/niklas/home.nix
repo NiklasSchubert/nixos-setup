@@ -101,4 +101,61 @@
   ];
 
   programs.vscode.enable = true;
+  programs.vscode.extensions = with pkgs.vscode-extensions; [
+    catppuccin.catppuccin-vsc
+    angular.ng-template
+    dbaeumer.vscode-eslint
+    eamodio.gitlens
+    bbenoist.nix
+    esbenp.prettier-vscode
+    yoavbls.pretty-ts-errors
+  ];
+  programs.vscode.userSettings = {
+    "editor.codeActionsOnSave.source.fixAll.eslint" = "explicit";
+    "editor.codeActionsOnSave.source.organizeImports" = "explicit";
+    "editor.fontFamily" = "'FiraCode Nerd Font Mono'";
+    "editor.fontLigatures" = true;
+    "editor.fontSize" = 12;
+    "editor.formatOnSave" = true;
+    "editor.minimap.enabled" = false;
+    "editor.minimap.side" = "left";
+    "editor.stickyScroll.enabled" = false;
+
+    "extensions.autoUpdate" = false;
+    "extensions.ignoreRecommendations" = true;
+
+    "git.autofetch" = true;
+
+    "security.workspace.trust.enabled" = false;
+    "security.workspace.trust.startupPrompt" = "never";
+    "security.workspace.trust.untrustedFiles" = "newWindow";
+
+    "telemetry.telemetryLevel" = "off";
+
+    "terminal.explorerKind" = "both";
+    "terminal.external.linuxExec" = "kitty";
+    "terminal.integrated.defaultProfile.linux" = "zsh";
+    "terminal.integrated.fontFamily" = "CaskaydiaCove Nerd Font Mono";
+    "terminal.integrated.fontSize" = 12;
+    "terminal.integrated.shell.linux" = "/usr/bin/zsh";
+    "terminal.sourceControlRepositoriesKind" = "both";
+
+    "window.commandCenter" = false;
+    "window.menuBarVisibility" = "toggle";
+    "window.titleBarStyle" = "native";
+
+    "workbench.colorTheme" = "Catppuccin Macchiato";
+    "workbench.layoutControl.enabled" = false;
+    "workbench.sideBar.location" = "right";
+
+    "[typescript].editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[html].editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[scss].editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[json].editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[jsonc].editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[css].editor.defaultFormatter" = "esbenp.prettier-vscode";
+    "[javascript].editor.defaultFormatter" = "esbenp.prettier-vscode";
+    
+    "diffEditor.renderSideBySide" = true;
+  };
 }
