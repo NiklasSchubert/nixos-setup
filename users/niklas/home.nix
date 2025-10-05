@@ -98,7 +98,18 @@
     
     # Node.js (required for various desktop components)
     nodejs_20
+
+    fnm
   ];
+
+  programs.bash = {
+    enable = true;
+
+    bashrcExtra = ''
+      eval "$(fnm env --use-on-cd --shell bash)"
+      source <(fnm completions --shell bash)
+    '';
+  };
 
   programs.vscode.enable = true;
   programs.vscode.extensions = with pkgs.vscode-extensions; [
