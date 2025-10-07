@@ -62,6 +62,7 @@
             # Package overlays for custom and modified packages
             overlays = [
               dots-hyprland.overlays.default # Hyprland desktop environment
+              (import ./overlays/materialyoucolor.nix)        # Material You color theming
             ];
           };
 
