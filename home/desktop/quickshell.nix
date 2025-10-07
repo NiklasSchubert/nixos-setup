@@ -7,7 +7,7 @@
     appearance = {
       extraBackgroundTint = true;
       fakeScreenRounding = 2;  # When not fullscreen
-      transparency = false;    # Disable for performance
+      transparency = true;    # Disable for performance
     };
     
     bar = {
@@ -23,7 +23,7 @@
         showMicToggle = true;          # Useful for meetings
         showKeyboardToggle = true;
         showDarkModeToggle = true;
-        showPerformanceProfileToggle = false;
+        showPerformanceProfileToggle = true;
       };
       
       workspaces = {
