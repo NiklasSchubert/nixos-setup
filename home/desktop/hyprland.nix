@@ -224,7 +224,7 @@
 
       #+! System Actions
       # Lock screen
-      bind = $Primary$Secondary, L, exec, hyprlock
+      bind = $Primary, L, exec, hyprlock
 
       #+! Quickshell Interface
       # Quickshell restart (equivalent to the old AGS restart)
